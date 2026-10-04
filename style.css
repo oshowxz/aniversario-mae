@@ -1,0 +1,867 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Henny+Penny&family=Oldenburg&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+
+/* =========================================================
+   VARIÁVEIS (mude as cores aqui)
+   ========================================================= */
+:root {
+    --destaque: #ffffff;
+    --destaque-suave: rgba(255, 255, 255, 0.35);
+
+    --vermelho: #e0113f;
+    --vermelho-texto: #ff4d6d;
+    --vermelho-escuro: #8b0027;
+
+    --vidro: rgba(255, 255, 255, 0.12);
+    --vidro-borda: rgba(255, 255, 255, 0.3);
+    --texto: #fdfdfd;
+    --texto-suave: #d7d7d7;
+    --texto-fraco: #b5b5b5;
+
+    --fonte-titulo: "Cormorant Garamond", "Playfair Display", serif;
+    --fonte-texto: "Oldenburg", serif;
+    --fonte-destaque: "Henny Penny", system-ui;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FUNDOS DE CADA PÁGINA
+   ========================================================= */
+.home {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)),
+        radial-gradient(circle, transparent 0%, rgba(0,0,0,0.9) 100%),
+        url('background/lirio-pronto.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.foryou {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)),
+        radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%),
+        url('background/lirios-cpa.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.ourday {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+        radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%),
+        url('background/lirios-01.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.memories {
+    position: relative;
+    min-height: 100vh;
+}
+
+.memories::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5)),
+        radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%),
+        url('background/lirio-memories.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes subir {
+    0%   { transform: translateY(0) scale(1); opacity: 0; }
+    10%  { opacity: 1; }
+    100% { transform: translateY(-120vh) scale(1.3); opacity: 0; }
+}
+
+@keyframes floatArrow {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(10px); }
+    100% { transform: translateY(0); }
+}
+
+.fade-in {
+    animation: aparecer 2s ease;
+}
+
+
+/* =========================================================
+   CORAÇÕES SUBINDO
+   ========================================================= */
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hearts span {
+    position: absolute;
+    bottom: -100px;
+    color: rgba(224, 17, 63, 0.45);
+    animation: subir linear infinite;
+}
+
+.hearts span:nth-child(1)  { left: 5%;  font-size: 20px; animation-duration: 12s; }
+.hearts span:nth-child(2)  { left: 15%; font-size: 35px; animation-duration: 13s; }
+.hearts span:nth-child(3)  { left: 28%; font-size: 30px; animation-duration: 11s; }
+.hearts span:nth-child(4)  { left: 40%; font-size: 24px; animation-duration: 18s; }
+.hearts span:nth-child(5)  { left: 52%; font-size: 25px; animation-duration: 11s; }
+.hearts span:nth-child(6)  { left: 63%; font-size: 30px; animation-duration: 14s; }
+.hearts span:nth-child(7)  { left: 74%; font-size: 24px; animation-duration: 13s; }
+.hearts span:nth-child(8)  { left: 82%; font-size: 38px; animation-duration: 16s; }
+.hearts span:nth-child(9)  { left: 90%; font-size: 40px; animation-duration: 12s; }
+.hearts span:nth-child(10) { left: 97%; font-size: 26px; animation-duration: 14s; }
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+.cabecalho {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: transform 0.4s ease;
+}
+
+.cabecalho.esconder {
+    transform: translateY(-100%);
+}
+
+.cabecalho nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.cabecalho nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 30px;
+    border: 1px solid var(--destaque-suave);
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.08);
+    transition: 0.3s;
+}
+
+.cabecalho nav a:not(.ativo):hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.cabecalho nav a.ativo {
+    border: 1px solid var(--vermelho);
+    background: linear-gradient(
+        to bottom,
+        rgba(224, 17, 63, 0.45),
+        rgba(139, 0, 39, 0.2)
+    );
+    box-shadow:
+        0 0 15px rgba(224, 17, 63, 0.55),
+        inset 0 0 10px rgba(224, 17, 63, 0.2);
+    backdrop-filter: blur(6px);
+}
+
+
+/* =========================================================
+   ELEMENTOS COMUNS
+   ========================================================= */
+.rosa {
+    color: var(--vermelho-texto);
+}
+
+.mini-title {
+    color: var(--vermelho-texto);
+    letter-spacing: 8px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    animation: aparecer 2s ease;
+}
+
+.section-title {
+    color: var(--vermelho-texto);
+    letter-spacing: 5px;
+    font-size: 13px;
+    margin-top: 120px;
+    margin-bottom: 20px;
+    animation: aparecer 2s ease;
+}
+
+.main-text {
+    font-family: var(--fonte-texto);
+    font-size: 20px;
+    line-height: 2;
+    color: var(--texto-suave);
+    margin-bottom: 100px;
+    animation: aparecer 2s ease;
+}
+
+.pequeno {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HOME
+   ========================================================= */
+.text-mini {
+    font-family: sans-serif;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--vermelho-texto);
+    margin-bottom: 20px;
+    animation: aparecer 2s ease;
+}
+
+.frase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 90px;
+    font-weight: 100;
+    line-height: 1.1;
+    color: aliceblue;
+    margin-top: 120px;
+    animation: aparecer 2s ease;
+}
+
+.linha {
+    width: 200px;
+    height: 2.5px;
+    background: linear-gradient(to right, transparent, var(--vermelho), transparent);
+    margin: 40px auto;
+    animation: aparecer 2s ease;
+}
+
+.text-final {
+    font-size: 20px;
+    text-align: center;
+    color: var(--texto-fraco);
+    padding: 60px 18%;
+    animation: aparecer 2s ease;
+}
+
+
+/* =========================================================
+   FOR YOU
+   ========================================================= */
+.for-you {
+    min-height: 100vh;
+    padding: 120px 18% 30px;
+}
+
+.for-you h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--texto);
+    margin-bottom: 40px;
+    animation: aparecer 2s ease;
+}
+
+.line {
+    width: 150px;
+    height: 1.5px;
+    background: linear-gradient(to right, var(--vermelho), var(--vermelho-escuro), transparent);
+    margin-bottom: 70px;
+    animation: aparecer 2s ease;
+}
+
+.text-block {
+    max-width: 700px;
+}
+
+.final-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 18%;
+    color: #ffffff;
+    animation: aparecer 2s ease;
+}
+
+.line01 {
+    width: 700px;
+    max-width: 100%;
+    height: 1px;
+    margin-bottom: 40px;
+    background: var(--vermelho-escuro);
+    animation: aparecer 2s ease;
+}
+
+.final-page h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #ff8fa3;
+    margin-bottom: 10px;
+    animation: aparecer 2s ease;
+}
+
+.final-page p {
+    font-size: 22px;
+    color: var(--texto-fraco);
+    animation: aparecer 2s ease;
+}
+
+
+/* =========================================================
+   YOUR DAY
+   ========================================================= */
+.our-day {
+    min-height: 100vh;
+    padding: 120px 18% 0;
+}
+
+.our-day h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 90px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--texto);
+    margin-bottom: 40px;
+    animation: aparecer 2s ease;
+}
+
+.citacao {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding-left: 20px;
+    border-left: 2px solid var(--vermelho);
+    animation: aparecer 2s ease;
+}
+
+.citacao p {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    line-height: 1.7;
+    color: rgb(190, 185, 185);
+    margin-bottom: 150px;
+    animation: aparecer 2s ease;
+}
+
+.day-block {
+    margin-bottom: 60px;
+    animation: aparecer 2s ease;
+}
+
+.final-page-our {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px;
+    color: var(--texto-fraco);
+    line-height: 1.8;
+    animation: aparecer 2s ease;
+}
+
+.final-page-our h1 {
+    color: var(--vermelho-texto);
+}
+
+.final-page-our p {
+    font-size: 22px;
+    animation: aparecer 2s ease;
+}
+
+
+/* =========================================================
+   MEMORIES
+   ========================================================= */
+.memories-body {
+    text-align: center;
+    margin-top: 120px;
+}
+
+.memories h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 100px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--texto);
+    margin-bottom: 40px;
+    animation: aparecer 2s ease;
+}
+
+.line-memories {
+    width: 200px;
+    height: 2.5px;
+    background: linear-gradient(to right, transparent, var(--vermelho), transparent);
+    margin: 40px auto;
+    animation: aparecer 2s ease;
+}
+
+.timeline-start {
+    text-align: center;
+    margin-top: 200px;
+    color: #ffffff;
+}
+
+.timeline-start span {
+    color: var(--vermelho-texto);
+    letter-spacing: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.timeline-start h1 {
+    font-size: 60px;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+.timeline {
+    position: relative;
+    max-width: 1400px;
+    margin: 100px auto;
+    padding: 0 5%;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--vermelho);
+}
+
+.timeline-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 140px 0;
+}
+
+.timeline-item.left  { flex-direction: row; }
+.timeline-item.right { flex-direction: row-reverse; }
+
+.timeline-image,
+.timeline-content {
+    width: 42%;
+}
+
+.timeline-image {
+    display: flex;
+    justify-content: center;
+}
+
+.timeline-image img {
+    width: 100%;
+    max-width: 340px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(224, 17, 63, 0.8);
+}
+
+.timeline-content {
+    padding: 30px;
+    background: var(--vidro);
+    border: 1px solid var(--vidro-borda);
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.timeline-content h2 {
+    font-family: var(--fonte-destaque);
+    color: #ffffff;
+}
+
+.timeline-content p {
+    font-family: var(--fonte-texto);
+    color: #ffffff;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    height: 3px;
+    background: var(--vermelho);
+    box-shadow: 0 0 10px var(--vermelho);
+    transform: translateY(-50%);
+}
+
+.timeline-item.left::before  { left: calc(50% - 120px); }
+.timeline-item.right::before { left: 50%; }
+
+.timeline-item::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--vermelho);
+    box-shadow: 0 0 15px var(--vermelho);
+    z-index: 2;
+}
+
+.timeline-end,
+.timeline-end01 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--vermelho);
+    text-shadow: 0 0 20px var(--vermelho);
+    animation: floatArrow 2s ease-in-out infinite;
+}
+
+.timeline-end   { margin-top: 140px; font-size: 80px; }
+.timeline-end01 { margin-top: 100px; font-size: 60px; }
+
+.final-page-memories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 100px;
+    padding: 80px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.8;
+    animation: aparecer 2s ease;
+}
+
+.final-page-memories p {
+    font-size: 28px;
+    animation: aparecer 2s ease;
+}
+
+.final-page-memories h1 {
+    font-size: 65px;
+    margin-top: 30px;
+    animation: aparecer 2s ease;
+}
+
+
+/* =========================================================
+   PLAYER DE MÚSICA
+   ========================================================= */
+.music-player-inline {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 280px;
+    margin: 150px auto 60px;
+    padding: 20px 25px;
+    border-radius: 20px;
+    background: var(--vidro);
+    border: 1px solid var(--vidro-borda);
+    backdrop-filter: blur(8px);
+}
+
+.music-player-inline .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.music-player-inline button {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.music-player-inline button:hover {
+    color: var(--vermelho-texto);
+}
+
+.music-player-inline #music-progress {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.music-player-inline #music-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--vermelho);
+    cursor: pointer;
+}
+
+.music-player-inline #music-progress::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: var(--vermelho);
+    cursor: pointer;
+}
+
+.music-player-inline #music-time {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   RESPONSIVO — CELULAR
+   ========================================================= */
+@media (max-width: 768px) {
+
+    .foryou,
+    .ourday {
+        background-attachment: scroll;
+    }
+
+    .cabecalho nav {
+        gap: 8px;
+        padding: 10px 8px;
+    }
+
+    .cabecalho nav a {
+        font-size: 11px;
+        padding: 8px 14px;
+        border-radius: 10px;
+    }
+
+    /* Home */
+    .frase {
+        font-size: 42px;
+        margin-top: 100px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .text-mini {
+        font-size: 11px;
+        letter-spacing: 3px;
+        margin-bottom: 40px;
+    }
+
+    .text-final {
+        font-size: 15px;
+        padding: 40px 6%;
+        margin-top: 80px;
+    }
+
+    .linha {
+        width: 120px;
+        margin: 30px auto;
+    }
+
+    /* For you */
+    .for-you {
+        padding: 100px 6% 30px;
+    }
+
+    .for-you h1 {
+        font-size: 52px;
+    }
+
+    .section-title {
+        margin-top: 150px;
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
+
+    .main-text {
+        font-size: 16px;
+        margin-bottom: 60px;
+    }
+
+    .final-page {
+        padding: 60px 6%;
+    }
+
+    .final-page h1 {
+        font-size: 22px;
+    }
+
+    .final-page p {
+        font-size: 17px;
+    }
+
+    .line01 {
+        width: 100%;
+    }
+
+    /* Your day */
+    .our-day {
+        padding: 100px 6% 0;
+    }
+
+    .our-day h1 {
+        font-size: 52px;
+    }
+
+    .citacao p {
+        font-size: 15px;
+        margin-bottom: 80px;
+    }
+
+    .final-page-our {
+        padding: 50px 6%;
+    }
+
+    .final-page-our p {
+        font-size: 17px;
+    }
+
+    /* Memories */
+    .memories-body {
+        margin-top: 100px;
+        padding: 0 6%;
+    }
+
+    .memories h1 {
+        font-size: 52px;
+    }
+
+    .timeline-start {
+        margin-top: 80px;
+        padding: 0 6%;
+    }
+
+    .timeline-start h1 {
+        font-size: 32px;
+    }
+
+    .timeline-start span {
+        font-size: 10px;
+        letter-spacing: 4px;
+    }
+
+    .timeline {
+        margin: 120px auto;
+        padding: 0 5%;
+    }
+
+    .timeline::before {
+        left: 16px;
+        transform: none;
+    }
+
+    .timeline-item,
+    .timeline-item.left,
+    .timeline-item.right {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 150px 0 60px 40px;
+    }
+
+    .timeline-image,
+    .timeline-content {
+        width: 100%;
+    }
+
+    .timeline-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .timeline-item::before {
+        display: none;
+    }
+
+    .timeline-item::after {
+        left: -32px;
+        top: 20px;
+        transform: none;
+    }
+
+    .music-player-inline {
+        width: 90%;
+        margin: 60px auto 40px;
+    }
+
+    .final-page-memories {
+        padding: 50px 6%;
+        margin-top: 40px;
+    }
+
+    .final-page-memories p {
+        font-size: 18px;
+    }
+
+    .final-page-memories h1 {
+        font-size: 45px;
+    }
+}
+
+
+@media (max-width: 380px) {
+    .frase,
+    .for-you h1,
+    .our-day h1,
+    .memories h1 {
+        font-size: 38px;
+    }
+
+    .cabecalho nav a {
+        font-size: 10px;
+        padding: 7px 10px;
+    }
+}
